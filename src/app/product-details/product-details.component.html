@@ -1,0 +1,315 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Library</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="assets/image/bg-10.jpg" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="assets/image/bg-69.jpg" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="assets/image/bg-84.jpg" alt="Third slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="assets/image/image00008.jpg" alt="Fourth slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="row my-3 mx-3">
+                <div class="col-md-4 my-3">
+                    <img class="d-block w-100" data-target="#carouselExampleIndicators" data-slide-to="0" src="assets/image/bg-10.jpg" alt="First slide">
+                </div>
+                <div class="col-md-4 my-3">
+                    <img class="d-block w-100" data-target="#carouselExampleIndicators"data-target="#carouselExampleIndicators" data-slide-to="1" src="assets/image/bg-69.jpg" alt="Second slide">
+                </div>
+                <div class="col-md-4 my-3">
+                    <img class="d-block w-100" data-target="#carouselExampleIndicators" data-slide-to="2" src="assets/image/bg-84.jpg" alt="Third slide">
+                </div>
+                <div class="col-md-4 my-3">
+                    <img class="d-block w-100" data-target="#carouselExampleIndicators" data-slide-to="3" src="assets/image/image00008.jpg" alt="Fourth slide">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <h2 class="product-name">Monkey.D.Luffy, Straw Hats</h2>
+            </div>
+            <div class="row price-content">
+                <h1 class="price-final mr-3">
+                    <fa-icon [icon]="faRupeeSign"></fa-icon>599
+                </h1>
+                <h3 class="price-without-discount mr-2">
+                    <fa-icon [icon]="faRupeeSign"></fa-icon><del>799</del>
+                </h3>
+                <h2 class="text-success">
+                    30% off
+                </h2>
+            </div>
+            <div class="row ratings">
+                <h3 class="rating-icon text-warning">
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStarHalfAlt"></fa-icon>
+                    <fa-icon [icon]="faRStar"></fa-icon>
+                </h3>
+                <h5 class="rating-text px-1 py-1 my-1">1200 star rating and 250 reviews</h5>
+            </div>
+            <div class="row offers">
+                <div class="offer-list">
+                    <p>
+                        <fa-icon class="text-success mr-1" [icon]="faCheckSquare"></fa-icon>
+                        <strong class="mr-1">Bank Offer</strong>20% Discount on SBI cards
+                    </p>
+                </div>
+                <div class="offer-list">
+                    <p>
+                        <fa-icon class="text-success mr-1" [icon]="faCheckSquare"></fa-icon>
+                        <strong class="mr-1">Bank Offer</strong>5% CashBack offer on Axis Bank
+                    </p>
+                </div>
+                <div class="offer-list">
+                    <p>
+                        <fa-icon class="text-success mr-1" [icon]="faCheckSquare"></fa-icon>
+                        <strong class="mr-1">Bank Offer</strong>25% Discount on all Credit cards
+                    </p>
+                </div>
+                <div class="offer-list">
+                    <p>
+                        <fa-icon class="text-success mr-1" [icon]="faCheckSquare"></fa-icon>
+                        <strong class="mr-1">Coupon Offer</strong>Extra 10% Offer Coupon on <fa-icon
+                            [icon]="faTicketAlt"></fa-icon>
+                        BookMyShow
+                    </p>
+                </div>
+            </div>
+            <div class="row delivery mt-4">
+                <h3 class="text-info">
+                    <fa-icon [icon]="faMapMarkerAlt" class="mr-2"></fa-icon>
+                </h3>
+                <p class="delivery-desc">Delivery by 2 Weeks | <span class="text-success">Free.</span></p>
+
+            </div>
+            <div class="row size mt-2">
+                <h4 class="mr-2 px-1 py-1">Size:</h4>
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Select Sizes
+                    </a>
+                  
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="#">Small</a>
+                      <a class="dropdown-item" href="#">Medium</a>
+                      <a class="dropdown-item" href="#">Large</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row colors mt-2">
+                <h4 class="mr-2">Colors:</h4>
+                <a href="" class="btn btn-primary text-light mr-1">Sky Blue</a>
+                <a href="" class="btn btn-info text-light">Blue</a>
+                <a href="" class="btn btn-danger text-light mr-1">Red</a>
+                <a href="" class="btn btn-success text-light mr-1">Green</a>
+                <a href="" class="btn btn-warning text-light mr-1">Yellow</a>
+            </div>
+            <div class="row mt-2">
+                <h4 class="seller mr-1">Seller: </h4>
+                <p class="seller-name px-1 py-1">Online Store</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-5">
+        <h2>Similar Products</h2>
+    </div>
+    <div class="row mt-5 text-center">
+        <div class="col-md-3">
+            <div class="card">
+                <img src="assets/image/bg-98.jpg" alt="" class="card-img-top img-fluid">
+                <div class="card-title">
+                    <h4>WhiteBeard</h4>
+                </div>
+                <div class="card-text card-desc">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique deleniti neque quia, dignissimos nisi repellat ullam omnis facilis error! Voluptate, nisi illum ea reiciendis asperiores expedita rem ullam debitis odit?</p>
+                    <a href="" class="btn btn-success text-light">Buy Now</a>
+                    <a href="" class="btn btn-danger text-light"><fa-icon [icon]="faCartPlus"></fa-icon>Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <img src="assets/image/857832.jpg" alt="" class="card-img-top img-fluid">
+                <div class="card-title">
+                    <h4>Trafalgar Law</h4>
+                </div>
+                <div class="card-text card-desc">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique deleniti neque quia, dignissimos nisi repellat ullam omnis facilis error! Voluptate, nisi illum ea reiciendis asperiores expedita rem ullam debitis odit?</p>
+                    <a href="" class="btn btn-success text-light">Buy Now</a>
+                    <a href="" class="btn btn-danger text-light"><fa-icon [icon]="faCartPlus"></fa-icon>Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <img src="assets/image/988738.jpg" alt="" class="card-img-top img-fluid">
+                <div class="card-title">
+                    <h4>Dracule Mihawk</h4>
+                </div>
+                <div class="card-text card-desc">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique deleniti neque quia, dignissimos nisi repellat ullam omnis facilis error! Voluptate, nisi illum ea reiciendis asperiores expedita rem ullam debitis odit?</p>
+                    <a href="" class="btn btn-success text-light">Buy Now</a>
+                    <a href="" class="btn btn-danger text-light"><fa-icon [icon]="faCartPlus"></fa-icon>Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <img src="assets/image/864197.jpg" alt="" class="card-img-top img-fluid">
+                <div class="card-title">
+                    <h4>Dracule Mihawk</h4>
+                </div>
+                <div class="card-text card-desc">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique deleniti neque quia, dignissimos nisi repellat ullam omnis facilis error! Voluptate, nisi illum ea reiciendis asperiores expedita rem ullam debitis odit?</p>
+                    <a href="" class="btn btn-success text-light">Buy Now</a>
+                    <a href="" class="btn btn-danger text-light"><fa-icon [icon]="faCartPlus"></fa-icon>Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <h2>Rating and Reviews</h2>
+    </div>
+    <div class="row my-5">
+        <div class="media">
+            <img src="assets/image/864488.jpg" class="mr-3" alt="review" width="64" height="auto">
+            <div class="media-body">
+              <h5 class="mt-0">
+                Bartholomeo Kuma
+                <span class="rating text-warning">
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStarHalfAlt"></fa-icon>
+                </span>
+              </h5>
+              
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+          </div>
+    </div>
+    <div class="row my-5">
+        <div class="media">
+            <img src="assets/image/948717.png" class="mr-3" alt="review" width="64" height="auto">
+            <div class="media-body">
+              <h5 class="mt-0">
+                Jimbei
+                <span class="rating text-warning">
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStarHalfAlt"></fa-icon>
+                </span>
+              </h5>
+              
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+          </div>
+    </div>
+    <div class="row my-5">
+        <div class="media">
+            <img src="assets/image/image00002.jpg" class="mr-3" alt="review" width="64" height="auto">
+            <div class="media-body">
+              <h5 class="mt-0">
+                Enel
+                <span class="rating text-warning">
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStarHalfAlt"></fa-icon>
+                </span>
+              </h5>
+              
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+          </div>
+    </div>
+    <div class="row my-5">
+        <div class="media">
+            <img src="assets/image/790588.png" class="mr-3" alt="review" width="64" height="auto">
+            <div class="media-body">
+              <h5 class="mt-0">
+                Marco
+                <span class="rating text-warning">
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <fa-icon [icon]="faStarHalfAlt"></fa-icon>
+                </span>
+              </h5>
+              
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+          </div>
+    </div>
+    <div class="row">
+        <h2>Post Your Own Reviews</h2>
+    </div>
+    <div class="row">
+        <form class="col-md-12">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Comments</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your own Comment"></textarea>
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</div>

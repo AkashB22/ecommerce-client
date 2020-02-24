@@ -1,0 +1,155 @@
+.product-page .desc{
+    font-size: medium;
+}
+
+.product-list .product-name, button{
+    font-size: medium;
+}
+
+.product-list button{
+    font-size: small;
+}
+
+.product-list .col-md-4{
+    width: 5rem;
+}
+
+.product-price fa-icon{
+    font-size: 0.75rem;
+}
+
+.discounted-price fa-icon{
+    font-size: 0.75rem;
+}
+
+.product-grid{
+    position: relative;
+    font-family: var(--ABeeZee);
+}
+
+.product-grid .product-image{
+    overflow: hidden;
+    position: relative;
+}
+
+.product-grid .product-image:before{
+    content: "";
+    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: all 0.4s ease-out 0s;
+}
+
+.product-grid:hover .product-image:before{
+     opacity: 1;
+}
+
+.product-grid .product-image a{
+    display: block;
+}
+
+.product-grid .product-image img{
+    width: 100%;
+    height: auto;
+}
+
+.product-image .pic-1{
+    opacity: 1;
+    backface-visibility: hidden;
+    transition: all 0.4s ease-out 0s;
+}
+
+.product-grid:hover .product-image .pic-1{
+    opacity: 0;
+}
+
+.product-image .pic-2{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    backface-visibility: hidden;
+    transform: scale(2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.4s ease-out 0s;
+}
+
+.product-grid:hover .product-image .pic-2{
+    opacity: 1;
+    transform: scale(1);
+}
+
+.product-image .product-trend-label,
+.product-image .product-discount-label{
+    color: white;
+    background-color: var(--text-color);
+    font-size: 0.7rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0 0.5rem;
+    position: absolute;
+    top: 0.1rem;
+    z-index: 3;
+}
+
+.product-image .product-trend-label{
+    left: 0.2rem;
+}
+
+.product-image .product-discount-label{
+    background-color: var(--primary-color);
+    right: 0.2rem;
+}
+
+.product-grid .social{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    transform: translateY(-50%);
+    position: absolute;
+    top: 60%;
+    left: 0.2rem;
+    z-index: 4;
+}
+
+.product-grid .social li{
+    margin: 0 0 0.2rem;
+    opacity: 0;
+    transform: translateX(-2rem);
+    transition: transform 0.3s ease-out 0s;
+}
+
+.product-grid:hover .social li{
+    opacity: 1;
+    transform: translateX(0rem);
+}
+
+.product-grid:hover .social li:nth-child(2){
+    transition-delay: 0.1s;
+}
+
+.product-grid:hover .social li:nth-child(3){
+    transition-delay: 0.2s;
+}
+
+.product-grid:hover .social li:nth-child(4){
+    transition-delay: 0.3s;
+}
+
+.product-grid .social li a{
+    
+    padding: 0.2rem;
+    color: white;
+    font-size: 0.8rem;
+    background-color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s;
+}

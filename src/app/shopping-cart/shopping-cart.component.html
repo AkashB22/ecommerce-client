@@ -1,0 +1,174 @@
+<div class="container-fluid">
+    <div class="row justify-content-center py-3">
+        <h2>Shopping Cart</h2>
+    </div>
+
+    <div class="main-section row">
+        <div class="col-md-12 col-12">
+            <h4 class="products mx-4">Products</h4>
+            <div class="row product-header">
+                <div class="col-md-3 col-4">Image</div>
+                <div class="col-md-7 col-6">Description</div>
+                <div class="col-md-2 col-2">Price</div>
+            </div>
+            <hr class="mb-1">
+            <div class="row product mb-1">
+                <div class="col-md-3 col-4">
+                    <img src="assets/image/image00022.jpg" alt="Product1" width="180">
+                </div>
+                <div class="col-md-7 col-6">
+                    <h5 class="product-name">Whitebeard pirates</h5>
+                    <p class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                        adipisci modi </p>
+                    <p class="text-success">in stock</p>
+                    <div class="quantity">
+                        quantity:
+                        <div class="dropdown d-inline">
+                            <select class="custom-select bg-secondary text-light w-25" id="inputGroupSelect01">
+                                <option value="1" selected>1 qty</option>
+                                <option value="2">2 qty</option>
+                                <option value="3">3 qty</option>
+                            </select>
+                        </div>
+                        <div class="delete-btn d-inline">
+                            <fa-icon class="text-danger ml-2" [icon]="faTrash"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-2">
+                    <span>599 <del>799</del></span>
+                </div>
+            </div>
+            <hr>
+            <div class="row product mb-1">
+                <div class="col-md-3 col-4">
+                    <img src="assets/image/945436.png" alt="Product1" width="180">
+                </div>
+                <div class="col-md-7 col-6">
+                    <h5 class="product-name">Roger pirates</h5>
+                    <p class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                        adipisci modi </p>
+                    <p class="text-success">in stock</p>
+                    <div class="quantity">
+                        quantity:
+                        <div class="dropdown d-inline">
+                            <select class="custom-select bg-secondary text-light w-25" id="inputGroupSelect01">
+                                <option value="1" selected>1 qty</option>
+                                <option value="2">2 qty</option>
+                                <option value="3">3 qty</option>
+                            </select>
+                        </div>
+                        <div class="delete-btn d-inline">
+                            <fa-icon class="text-danger ml-2" [icon]="faTrash"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-2">
+                    <span>599 <del>799</del></span>
+                </div>
+            </div>
+            <hr>
+            <div class="row product mb-1">
+                <div class="col-md-3 col-4">
+                    <img src="assets/image/329383.jpg" alt="Product1" width="180">
+                </div>
+                <div class="col-md-7 col-6">
+                    <h5 class="product-name">Red Hair pirates</h5>
+                    <p class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                        adipisci modi </p>
+                    <p class="text-success">in stock</p>
+                    <div class="quantity">
+                        quantity:
+                        <div class="dropdown d-inline">
+                            <select class="custom-select bg-secondary text-light w-25" id="inputGroupSelect01">
+                                <option value="1" selected>1 qty</option>
+                                <option value="2">2 qty</option>
+                                <option value="3">3 qty</option>
+                            </select>
+                        </div>
+                        <div class="delete-btn d-inline">
+                            <fa-icon class="text-danger ml-2" [icon]="faTrash"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-2">
+                    <span>599 <del>799</del></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row second-section">
+        <div class="col-md-8 billing-address mt-4">
+            <h4 class="my-3">Billing Address</h4>
+            <form action="" class="form-group">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">First Name:</label>
+                        <input class="form-control" type="text" name="firstName" id="firstName">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Last Name:</label>
+                        <input class="form-control" type="text" name="lastName" id="lastName">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" name="email" id="email" placeholder="email">
+                </div>
+                <div class="mb-3">
+                    <label for="address">Address:</label>
+                    <textarea class="form-control" name="address" id="address" placeholder="address"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="country">Country</label>
+                        <select name="country" id="country" class="form-control">
+                            <option value="choose" selected>Choose...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="state">State:</label>
+                        <select name="state" id="cstateountry" class="form-control">
+                            <option value="choose" selected>Choose...</option>
+                            <option value="TamilNadu">TamilNadu</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="zip">Country:</label>
+                        <input type="text" name="zip" id="zip" class="form-control">
+                    </div>
+                </div>
+                <div class="row justify-content-center my-4">
+                    <button type="submit" class="btn btn-success">Continue to Payment</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 total mt-4">
+            <h4 class="subtotal my-4">Total</h4>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div class="item-total">
+                        <h6 class="my-0">Item Total:</h6>
+                        <small class="text-muted">after discounts</small>
+                    </div>
+                    <span>$599</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div class="item-total">
+                        <h6 class="my-0">Delivery Charges:</h6>
+                        <small class="text-muted"></small>
+                    </div>
+                    <span>$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div class="item-total">
+                        <h6 class="my-0">Total:</h6>
+                        <small class="text-muted"></small>
+                    </div>
+                    <span>$599</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,157 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=ABeeZee|Alegreya+Sans|Cantarell|Crete+Round|Pacifico&display=swap');
+
+:root{
+  --light-grey: #2b3032a1;
+  --primary-color: #45ccb8;
+  --border: #2b303218;
+  --text-color: #ff686b;
+  --ABeeZee: "ABeeZee", sans-serif;
+  --Alegreya-Sans: "Alegreya+Sans", cursive;
+  --Cantarell: "Cantarell", cursive;
+  --Crete-Round: "Crete+Round", cursive;
+  --Pacifico: "Pacifico", cursive;
+}
+
+html, body{
+  height: 100%;
+}
+
+body{
+  font-family: sans-serif;
+  color: #6c6f73
+}
+
+h1, h2, h3, h4, h5, h6{
+  color: #333;
+}
+
+h6{
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+}
+
+img{
+  max-width: 100%;
+}
+
+blockquote{
+  font-size: 1.6rem;
+  color: #333;
+  border: none;
+  padding: 0;
+}
+.blockquote-footer{
+  margin: 1rem 0 0;
+}
+
+.container {
+  max-width: 960px;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+/* .carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 1px solid black !important;
+  background-image: none;
+}
+
+.carousel-control-next .carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: red !important;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: red;
+} */
+
+/* slick-dots */
+.slick-dots{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 1rem 0rem;
+  list-style-type: none;
+  position: absolute;
+  right: 50%;
+  bottom: 0;
+}
+
+.slick-dots li{
+  margin: 0rem 0.6rem;
+}
+
+.slick-dots button{
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: none;
+  background-color: var(--primary-color);
+  text-indent: -999999px;
+  border-radius: 100%;
+}
+
+.slick-dots li.slick-active button{
+  transform: scale(2.5);
+  box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.205);
+}
+
+.slider-two .slick-track .product:hover span{
+  background-color: var(--primary-color);
+}
+
+@media screen and (max-width: 768px){
+
+}
+
+@media screen and (max-width: 480px){
+  .site-content .site-title{
+    font-size: 1.5rem !important;
+    padding-left: 6rem;
+  }
+
+  .site-content .site-desc{
+    width: 25rem;
+  }
+
+  .site-content .site-btn2{
+    display: none;
+  }
+
+  .site-content .site-btn1{
+    margin-right: 2.5rem;
+  }
+
+  .section-1 .para-1{
+    margin-left: 5rem !important;
+  }
+
+
+
+
+}

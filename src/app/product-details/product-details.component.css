@@ -1,0 +1,38 @@
+ .breadcrumb{
+    font-size: 0.75rem;
+    color: var(--light-grey);
+ }
+
+ .breadcrumb .breadcrumb-item+:before{
+    content: '>' !important;
+ }
+
+ .delivery .delivery-desc{
+        font-size: 1rem;
+ }
+
+ .seller-name{
+     font-size: 1.1rem;
+ }
+
+ .card-desc p{
+    font-size: 0.7rem;
+ }
+ 
+ .card-desc a{
+    font-size: 0.7rem;
+    margin: 0.5rem 0.5rem;
+ }
+
+ .card-desc fa-icon{
+   margin: 0 0.5rem  0 0;
+ }
+
+ .card{
+    border: none;
+    border-radius: 0.5rem;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(217,217,217,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(217,217,217,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(217,217,217,0.75);
+ }
+

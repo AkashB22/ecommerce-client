@@ -1,0 +1,71 @@
+import fonts from google fonts
+.primary-color{
+    color: var(--primary-color);
+}
+
+.bg-primary-color{
+    background-color: var(--primary-color) !important;
+}
+
+.text-color{
+    color: var(--text-color);
+}
+
+.font-ABeeZee{
+    font-family: var(--ABeeZee);
+}
+
+.lightblue{
+    color: lightblue;
+}
+
+header .container-fluid{
+    background-color: var(--primary-color);
+}
+
+.site-title{
+    font-family: var(--Alegreya-Sans);
+}
+
+header .container-fluid .dropdown-toggle,
+.container-fluid .dropdown-item{
+    font-size: 0.7em;
+}
+
+.header-links a{
+    text-decoration: none;
+    font-size: 0.9em;
+    color: white;
+}
+
+
+.navbar-nav{
+    padding: 0.8em 0em;
+}
+
+.navbar-nav .nav-link{
+    color: var(--light-grey) !important;
+    font-size: 0.9em;
+}
+
+.navbar-nav .navbar-item .navbar-link{
+    padding: 0 1.3em;
+}
+.navbar-brand img{
+    margin-right: 1em;
+}
+
+/* Section-5 */
+.section-5 fa-icon{
+    color: var(--primary-color);
+}
+
+.section-5{
+    margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 360px){
+    .contact-btn{
+        margin-top: 1rem;
+    }
+}

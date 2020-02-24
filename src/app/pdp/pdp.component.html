@@ -1,0 +1,74 @@
+<!-- First slider-->
+<!-- <div class="container-fluid p-0">
+    <ngb-carousel *ngIf="slides" class="carousel site-slider">
+        <ng-template ngbSlide  *ngFor="let slide of slides; let i=index">
+            <div class="slide slider-one">
+                <div class="picsum-img-wrapper">
+                    <img src="{{slide.img}}" class="image-fluid" alt="Banner1">
+                </div>
+            </div>
+            <div class="carousel-caption">
+                <h3 class="text-grey">{{i+1}} slide label</h3>
+                <p class="text-grey">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </div>
+        </ng-template>
+    </ngb-carousel>
+</div> -->
+
+
+<div class="container-fluid p-0">
+    <div class="site-slider" *ngIf="slides">
+        <ngx-slick-carousel class="carousel site-slider" 
+        #slickModal="slick-carousel" 
+        [config]="slideConfig"
+        (init)="slickInit($event)" 
+        (breakpoint)="breakpoint($event)" 
+        (afterChange)="afterChange($event)"
+        (beforeChange)="beforeChange($event)">
+            <div ngxSlickItem *ngFor="let slide of slides" class="slide slider-one">
+                <img src="{{ slide.img }}" alt="" width="100%">
+            </div>
+        </ngx-slick-carousel>
+        
+        <div class="slider-btn">
+            <span class="prev position-top">
+                <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </span>
+            <span class="next position-top right-0">
+                <fa-icon [icon]="faChevronRight"></fa-icon>
+            </span>
+        </div>
+<!-- 
+        <button (click)="addSlide()">Add</button>
+        <button (click)="removeSlide()">Remove</button>
+        <button (click)="slickModal.slickGoTo(2)">slickGoto 2</button>
+        <button (click)="slickModal.unslick()">unslick</button> -->
+    </div>
+</div>
+
+<!-- second slider -->
+
+<div class="container-fluid">
+    <div class="site-slider-two px-md-4">
+        <ngx-slick-carousel class="carousel row slider-two text-center" 
+        #slickModal2="slick-carousel" 
+        [config]="slideTwoConfig"
+        (init)="slickInit($event)" 
+        (breakpoint)="breakpoint($event)" 
+        (afterChange)="afterChange($event)"
+        (beforeChange)="beforeChange($event)">
+            <div ngxSlickItem  class="slide col-md-2 product pt-md-5 pt-4" *ngFor="let slide2 of slides2"> 
+                <img src="{{slide2.img}}" alt="Product" width="100%">
+                <span class="border site-btn btn-span">{{slide2.name}}</span>
+            </div>
+        </ngx-slick-carousel>
+        <div class="slider-btn-two fa-2x text-secondary left-0">
+            <span class="prev position-top">
+                <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </span>
+            <span class="next position-top right-0">
+                <fa-icon [icon]="faChevronRight"></fa-icon>
+            </span>
+        </div>
+    </div>
+</div>

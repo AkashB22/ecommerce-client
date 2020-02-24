@@ -1,0 +1,15 @@
+.main-section .product-header{
+    padding: 0rem 1rem;
+}
+
+.main-section .product-header >div{
+    padding: 0.5rem 1rem;
+}
+
+.main-section .product >div{
+    padding: 0.5rem 1rem;
+}
+
+hr{
+    margin: 0.3rem;
+}
