@@ -1,15 +1,26 @@
 <div class="container my-5">
     <div class="row">
-        <div class="col-md-6 mt-5 mx-auto">
+        <div class="col-md-6 mx-auto">
             <div class="card">
                 <div class="card-header">
                     <h3 class="mb-0">Sign Up</h3>
                 </div>
                 <div class="card-body">
+                    <div class="alert alert-danger" *ngIf="isServerError">
+                        {{serverMessage}}
+                    </div>
                     <form class="form" [formGroup]="signupForm" (ngSubmit)="onSubmit($event)">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" formControlName="username" id="username" placeholder="username">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.username">
+                                <div class="error-message invalid-feedback" 
+                                    *ngIf="signupForm.get('username').hasError(error.type) && (signupForm.get('username').dirty || signupForm.get('username').touched)">
+                                    {{error.message}}
+                                </div>
+                            </ng-container>
                         </div>
                         <div class="form-group">
                             <label for="email">Email address</label>
@@ -18,18 +29,56 @@
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                                 else.</small>
                         </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.email">
+                                <div class="error-message invalid-feedback" 
+                                    *ngIf="signupForm.get('email').hasError(error.type) && (signupForm.get('email').dirty || signupForm.get('email').touched)">
+                                    {{error.message}}
+                                </div>
+                            </ng-container>
+                        </div>
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control rounded-0" formControlName="password" id="password" placeholder="Password">
                         </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.password">
+                                <div class="error-message invalid-feedback" 
+                                    *ngIf="signupForm.get('password').hasError(error.type) && (signupForm.get('password').dirty || signupForm.get('password').touched)">
+                                    {{error.message}}
+                                </div>
+                            </ng-container>
+                        </div>
                         <div class="form-group">
-                            <label for="repeatPassword">Repeat Password</label>
-                            <input type="password" class="form-control rounded-0" formControlName="repeatPassword" id="repeatPassword"
-                                placeholder="Repeat Password">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control rounded-0" formControlName="confirmPassword" id="confirmPassword"
+                                placeholder="Confirm Password">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.confirmPassword">
+                                <div class="error-message invalid-feedback" 
+                                    *ngIf="signupForm.get('confirmPassword').hasError(error.type) && (signupForm.get('confirmPassword').dirty || signupForm.get('confirmPassword').touched)">
+                                    {{error.message}}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="password-match-message invalid-feedback" *ngIf="signupForm.errors?.passworNotMatch && (signupForm.get('confirmPassword').dirty || signupForm.get('confirmPassword').touched)">
+                            Password must match.
                         </div>
                         <div class="form-group">
                             <label for="phone">Mobile Number</label>
-                            <input type="number" class="form-control rounded-0" formControlName="phone" id="phone" placeholder="phone">
+                            <input type="text" class="form-control rounded-0" formControlName="phone" id="phone" placeholder="phone">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.phone">
+                                <div class="error-message invalid-feedback" 
+                                    *ngIf="signupForm.get('phone').hasError(error.type) && (signupForm.get('phone').dirty || signupForm.get('phone').touched)">
+                                    {{error.message}}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="number-chech-message invalid-feedback" *ngIf="signupForm.errors?.notANumber && (signupForm.get('phone').dirty || signupForm.get('phone').touched)">
+                            mobile number must contain only number.
                         </div>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">

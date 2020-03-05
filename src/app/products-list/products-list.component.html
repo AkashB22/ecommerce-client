@@ -11,31 +11,33 @@
         </div>
         <div class="col-md-10 product-list">
             <h4 class="category">New Arrivals</h4>
-            <div class="row py-3 text-center">
-                <div class="col-md-4 py-3">
-                    <div class="product-grid border mr-1 pb-1">
-                        <div class="product-image">
-                            <a href="">
-                                <img class="pic-1" src="assets/image/image00029.jpg" alt="Product1">
-                                <img class="pic-2" src="assets/image/image00032.jpg" alt="Product1">
-                            </a>
-                            <span class="product-trend-label">Trending</span>
-                            <span class="product-discount-label">Discounted(%)</span>
-                            <ul class="social">
-                                <li><a href="" data-tip="Add to Cart"><fa-icon [icon]="faShoppingCart"></fa-icon></a></li>
-                                <li><a href="" data-tip="WishList"><fa-icon [icon]="faHeart"></fa-icon></a></li>
-                                <li><a href="" data-tip="Compare"><fa-icon [icon]="faRandom"></fa-icon></a></li>
-                                <li><a href="" data-tip="Quick View"><fa-icon [icon]="faSearch"></fa-icon></a></li>
-                            </ul>
-                        </div>
-                        <div class="product-content">
-                            <h5 class="product-name"><a href="" >Luffy Pirates</a></h5>
-                            <div class="product-price"><fa-icon [icon]="faRupeeSign"></fa-icon><del>100</del></div>
-                            <div class="discounted-price"><fa-icon [icon]="faRupeeSign"></fa-icon>75</div>
-                            <button class="btn btn-success py-1">Buy</button>
+            <div class="row py-3 text-center" *ngIf="products">
+                <ng-container *ngFor="let product of products">
+                    <div class="col-md-4 py-3">
+                        <div class="product-grid border mr-1 pb-1">
+                            <div class="product-image">
+                                <a href="">
+                                    <img class="pic-1" [src]="product.imagePath[0]" alt="Product1">
+                                    <img class="pic-2" [src]="product.imagePath[1]" alt="Product1">
+                                </a>
+                                <span class="product-trend-label" *ngIf="product.isTrending">Trending</span>
+                                <span class="product-discount-label" *ngIf="product.isDiscounted">Discounted(%)</span>
+                                <ul class="social">
+                                    <li><a href="" data-tip="Add to Cart"><fa-icon [icon]="faShoppingCart"></fa-icon></a></li>
+                                    <li><a href="" data-tip="WishList"><fa-icon [icon]="faHeart"></fa-icon></a></li>
+                                    <li><a href="" data-tip="Compare"><fa-icon [icon]="faRandom"></fa-icon></a></li>
+                                    <li><a href="" data-tip="Quick View"><fa-icon [icon]="faSearch"></fa-icon></a></li>
+                                </ul>
+                            </div>
+                            <div class="product-content">
+                                <h5 class="product-name"><a href="" >{{product.name}}</a></h5>
+                                <div class="product-price" *ngIf="product.isDiscounted"><fa-icon [icon]="faRupeeSign"></fa-icon><del>{{product.price + (product.price * product.discountPercent / 100) | number:'1.0-0'}}</del></div>
+                                <div class="discounted-price"><fa-icon [icon]="faRupeeSign"></fa-icon>{{product.price}}</div>
+                                <button class="btn btn-success py-1">Add to cart</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>

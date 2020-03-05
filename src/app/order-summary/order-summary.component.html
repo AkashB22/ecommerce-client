@@ -1,5 +1,153 @@
 <div class="container">
-    <div class="row">
+    <div class="row heading">
         <h2>Order Summary</h2>
+    </div>
+    <div class="row thank-you-section border rounded alert alert-success">
+        <div class="d-flex flex-row jsutify-content-between message">
+            <fa-icon [icon]="faCheckCircle" class="fa-2x"></fa-icon>
+            <h4 class="mx-3 my-2 alert-success">Thank You USER, your order ORDER_NUMBER is confirmed. Please check your email from
+                updates.</h4>
+
+            <div class="manage-order-btn d-flex flex-column">
+                <button class="btn mtn-btn btn-success">Manage your order</button>
+                <button class="btn btn-secondary ctn-btn">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 order-details">
+        <h4 class="text">Your Order Details: </h4>
+        <div class="main-section row">
+            <div class="col-md-12 col-12">
+                <div class="row product-header">
+                    <div class="col-md-3 col-4">Image</div>
+                    <div class="col-md-7 col-6">Description</div>
+                    <div class="col-md-2 col-2">Price</div>
+                </div>
+                <hr class="mb-1">
+                <div class="row product mb-1">
+                    <div class="col-md-3 col-4">
+                        <img src="assets/image/image00022.jpg" alt="Product1" width="180">
+                    </div>
+                    <div class="col-md-7 col-6">
+                        <h5 class="product-name">Whitebeard pirates</h5>
+                        <p class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                            adipisci modi </p>
+                        <p class="text-success">in stock</p>
+                        <div class="quantity">
+                            quantity:
+                            <div class="dropdown d-inline">
+                                <select class="custom-select bg-secondary text-light w-25" id="inputGroupSelect01">
+                                    <option value="1" selected>1 qty</option>
+                                    <option value="2">2 qty</option>
+                                    <option value="3">3 qty</option>
+                                </select>
+                            </div>
+                            <div class="delete-btn d-inline">
+                                <fa-icon class="text-danger ml-2" [icon]="faTrash"></fa-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2">
+                        <span>599 <del>799</del></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row product mb-1">
+                    <div class="col-md-3 col-4">
+                        <img src="assets/image/945436.png" alt="Product1" width="180">
+                    </div>
+                    <div class="col-md-7 col-6">
+                        <h5 class="product-name">Roger pirates</h5>
+                        <p class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                            adipisci modi </p>
+                        <p class="text-success">in stock</p>
+                        <div class="quantity">
+                            quantity:
+                            <div class="dropdown d-inline">
+                                <select class="custom-select bg-secondary text-light w-25" id="inputGroupSelect01">
+                                    <option value="1" selected>1 qty</option>
+                                    <option value="2">2 qty</option>
+                                    <option value="3">3 qty</option>
+                                </select>
+                            </div>
+                            <div class="delete-btn d-inline">
+                                <fa-icon class="text-danger ml-2" [icon]="faTrash"></fa-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2">
+                        <span>599 <del>799</del></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row product mb-1">
+                    <div class="col-md-3 col-4">
+                        <img src="assets/image/329383.jpg" alt="Product1" width="180">
+                    </div>
+                    <div class="col-md-7 col-6">
+                        <h5 class="product-name">Red Hair pirates</h5>
+                        <p class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                            adipisci modi </p>
+                        <p class="text-success">in stock</p>
+                        <div class="quantity">
+                            quantity:
+                            <div class="dropdown d-inline">
+                                <select class="custom-select bg-secondary text-light w-25" id="inputGroupSelect01">
+                                    <option value="1" selected>1 qty</option>
+                                    <option value="2">2 qty</option>
+                                    <option value="3">3 qty</option>
+                                </select>
+                            </div>
+                            <div class="delete-btn d-inline">
+                                <fa-icon class="text-danger ml-2" [icon]="faTrash"></fa-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2">
+                        <span>599 <del>799</del></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 second-section">
+        <div class="col-md-8 billing-address">
+            <h4 class="text">Billing Address</h4>
+            <address>
+                1355 Market St, Suite 900
+                <br>
+                San Francisco, CA 94103
+                <br>
+                P: (123) 456-7890
+            </address>
+        </div>
+        <div class="col-md-4 total">
+            <h4 class="subtotal text">Total</h4>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div class="item-total">
+                        <h6 class="my-0">Item Total:</h6>
+                        <small class="text-muted">after discounts</small>
+                    </div>
+                    <span>$599</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div class="item-total">
+                        <h6 class="my-0">Delivery Charges:</h6>
+                        <small class="text-muted"></small>
+                    </div>
+                    <span>$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div class="item-total">
+                        <h6 class="my-0">Total:</h6>
+                        <small class="text-muted"></small>
+                    </div>
+                    <span>$599</span>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

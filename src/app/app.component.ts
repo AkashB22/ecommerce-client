@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from './services/user.service';
 import {Subscription} from 'rxjs';
-import {User} from './models/user';
 
-import {faSearch, faShoppingBasket} from '@fortawesome/free-solid-svg-icons';
+
+import {User} from './models/user';
+import {faSearch, faShoppingBasket, faUserEdit} from '@fortawesome/free-solid-svg-icons';
 import {faFacebookF, faInstagram, faYoutube, faTwitter} from '@fortawesome/free-brands-svg-icons'
 
 @Component({
@@ -16,8 +17,10 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService){}
 
   validUser = false;
+  username: string = '';
   title = 'Title';
   authListenerSubs : Subscription;
+  profileListenerSubs : Subscription;
   user : User;
   faSearch = faSearch;
   faShoppingBasket = faShoppingBasket;
@@ -25,32 +28,31 @@ export class AppComponent implements OnInit {
   faInstagram = faInstagram;
   faTwitter = faTwitter;
   faYoutube = faYoutube;
+  faUserEdit = faUserEdit;
 
   ngOnInit(){
     this.userService.autoAuthUser();
-    this.validUser = this.userService.getIsAuth();
-    this.authListenerSubs = this.userService
-      .getAuthStatusListener()
+    this.authListenerSubs = this.userService.getAuthStatusListener()
       .subscribe((auth)=>{
         this.validUser = auth;
         if(this.validUser){
-          this.userService.getProfile()
+          this.userService.getProfile();
+          this.profileListenerSubs = this.userService.getProfileListener()
           .subscribe(
-            user=>{
-              this.user = user;
-              console.log(this.user);
-            });
-        } else{
-          this.user = null;
+            response =>{
+              console.log(response);
+              this.username = response['user']['username'];
+            }
+          )
         }
       });
+    
+  }
+
+  ngOnDestroy(){
+    this.authListenerSubs.unsubscribe();
     if(this.validUser){
-      this.userService.getProfile()
-          .subscribe(
-            user=>{
-              this.user = user;
-              console.log(this.user);
-            });
+      this.profileListenerSubs.unsubscribe();
     }
   }
 

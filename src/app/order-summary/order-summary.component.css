@@ -1,0 +1,25 @@
+.heading h2{
+    margin-top: 1rem;
+}
+
+.thank-you-section{
+    padding: 1rem;
+}
+
+.thank-you-section .btn{
+    margin-bottom: 0.4rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+}
+
+.order-details .text{
+    margin-bottom: 1rem;
+}
+
+.billing-address .text{
+    margin-bottom: 1rem;
+}
+
+.total .text{
+    margin-bottom: 1rem;
+}

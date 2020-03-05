@@ -13,6 +13,8 @@ import {ProductsListComponent} from './products-list/products-list.component';
 import {ProductDetailsComponent} from './product-details/product-details.component';
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 import {OrderSummaryComponent} from './order-summary/order-summary.component';
+import {ForgetPasswordComponent} from './forget-password/forget-password.component';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path:'pdp', component: PdpComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'signin', component: SigninComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: 'forget-password', component: ForgetPasswordComponent},
+  {path: 'reset-password/:resetPasswordToken', component: ResetPasswordComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent},
   {path: 'products-list', component: ProductsListComponent},
   {path: 'product-details', component: ProductDetailsComponent},

@@ -1,4 +1,4 @@
-<header>
+<header class="sticky-top">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-4 col-sm-12 col-12">
@@ -26,64 +26,66 @@
       </div>
     </div>
   </div>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink='/home'>
-      <img class="border rounded-circle" src='/assets/image/law.jpg' alt='logo' height="26">
-      <span>Startup</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/home' routerLinkActive="active">Home <span
-              class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/events' routerLinkActive="active">Events</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/land' routerLinkActive="active">Landing Page</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/pdp' routerLinkActive="active">Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/products-list' routerLinkActive="active">List</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/product-details' routerLinkActive="active">Product Details</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/order-summary' routerLinkActive="active">Order</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li> -->
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/signup' *ngIf="!validUser" routerLinkActive="active">Signup</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink='/signin' *ngIf="!validUser" routerLinkActive="active">Sign in</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/profile" *ngIf="validUser" routerLinkActive="active">Hello
-            {{user.user?.username}}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="logoutUser()" *ngIf="validUser" routerLinkActive="active">Logout</a>
-        </li>
-      </ul>
-      <!-- <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form> -->
-    </div>
-  </nav>
+  <div class="container-fulid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" routerLink='/home'>
+        <img class="border rounded-circle" src='/assets/image/law.jpg' alt='logo' height="26">
+        <span>Startup</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/home' routerLinkActive="active">Home <span
+                class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/events' routerLinkActive="active">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/land' routerLinkActive="active">Landing Page</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/pdp' routerLinkActive="active">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/products-list' routerLinkActive="active">List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/product-details' routerLinkActive="active">Product Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/order-summary' routerLinkActive="active">Order</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li> -->
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/signup' *ngIf="!validUser" routerLinkActive="active">Signup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/signin' *ngIf="!validUser" routerLinkActive="active">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/profile" *ngIf="validUser" routerLinkActive="active">Hello
+              {{username}} <fa-icon [icon]="faUserEdit"></fa-icon></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="logoutUser()" *ngIf="validUser" routerLinkActive="active">Logout</a>
+          </li>
+        </ul>
+        <!-- <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+      </div>
+    </nav>
+  </div>
 </header>
 <main role="main">
   <router-outlet></router-outlet>
@@ -104,7 +106,7 @@
       <h4 class="my-4">If any help contact us</h4>
 
       <div class="form-inline justify-content-center">
-        <input type="email" class="form-control px-4 py-2" size="40" placeholder="your email" name="email" id="email">
+        <input type="email" class="form-control px-4 py-2" size="40" placeholder="your email" name="emailContact" id="emailContact">
         <button class="btn btn-danger px-4 py-2 contact-btn">Contact Us</button>
       </div>
     </div>

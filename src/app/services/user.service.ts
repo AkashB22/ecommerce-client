@@ -15,15 +15,20 @@ export class UserService {
   private tokenTimer: any;
   private userId: string;
   private users = 'http://localhost:3000/users';
+  private index = 'http://localhost:3000';
   private xAuthHeader = {
     headers : new HttpHeaders({
       'x-auth' : 'false'
     })
   };
   private authStatusListener = new Subject<any>();
+  private signinStatusListener = new Subject<any>();
+  private signupStatusListener = new Subject<any>();
+  private forgetPasswordListener = new Subject<any>();
+  private profileListener = new Subject<any>();
 
   signupUser(user){
-    this.http.post(`${this.users}/signup`, user, this.xAuthHeader)  
+    this.http.post(`${this.users}/signup`, user)  
       .subscribe(
         (response)=>{
           let token = response['token'];
@@ -40,6 +45,9 @@ export class UserService {
             this.saveAuthData(token, expirationDate, this.userId);
             this.router.navigate(['home']);
           }
+        },
+        (error)=>{
+          this.signupStatusListener.next(error);
         }
       )
   }
@@ -52,7 +60,7 @@ export class UserService {
           this.token = token;
           if(token){
             this.isAuthenticated = true;
-            this.userId = response['userId'];
+            this.userId = window.atob(response['token'].split('.')[1]);
             const expiresInDuration = response['expiresIn'];
             this.setAuthTimer(expiresInDuration);
             this.authStatusListener.next(true);
@@ -62,9 +70,59 @@ export class UserService {
             this.saveAuthData(token, expirationDate, this.userId);
             this.router.navigate(['home']);
           }
+        },
+        (error)=>{
+          this.signinStatusListener.next(error);
         }
       )
   }
+
+  updateUser(user){
+    this.http.put(`${this.users}/update`, user)
+      .subscribe(
+        response=>{
+          this.profileListener.next(response)
+        });
+  }
+
+  forgetPassword(email){
+    this.http.post(`${this.users}/forgetPassword`, email, this.xAuthHeader)
+      .subscribe(
+        response =>{
+          this.forgetPasswordListener.next(response);
+        },
+        error =>{
+          this.forgetPasswordListener.next(error);
+        }
+      )
+  }
+
+  resetPasswordLink(token){
+    return this.http.get(`${this.users}/resetPasswordLink/${token}`, this.xAuthHeader);
+  }
+
+  resetPassword(token, password){
+    this.http.post(`${this.users}/resetPassword/${token}`, password, this.xAuthHeader)
+    .subscribe(
+      response=>{
+        let token = response['token'];
+        this.token = token;
+        if(token){
+          this.isAuthenticated = true;
+          this.userId = window.atob(response['token'].split('.')[1]);
+          const expiresInDuration = response['expiresIn'];
+          this.setAuthTimer(expiresInDuration);
+          this.authStatusListener.next(true);
+          const now = new Date();
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+          console.log(expirationDate);
+          this.saveAuthData(token, expirationDate, this.userId);
+          this.router.navigate(['home']);
+        }
+      }
+    );
+  }
+  
 
   logout(){
     this.token = null;
@@ -77,8 +135,37 @@ export class UserService {
   }
 
   getProfile(){
-    return this.http.get(`${this.users}/profile`)
+    this.http.get(`${this.users}/profile`)
+      .subscribe(
+        response=>{
+          this.profileListener.next(response);
+        },
+        error=>{
+          this.profileListener.next(error);
+        }
+      )
   }
+
+    getAuthStatusListener(){
+    return this.authStatusListener.asObservable();
+  }
+
+  getSigninStatusListener(){
+    return this.signinStatusListener.asObservable();
+  }
+
+  getSignupStatusListener(){
+    return this.signupStatusListener.asObservable();
+  }
+
+  getForgetPasswordListener(){
+    return this.forgetPasswordListener.asObservable();
+  }
+
+  getProfileListener(){
+    return this.profileListener.asObservable();
+  }
+
 
   autoAuthUser(){
     const authInformation = this.getAuthData();
@@ -133,10 +220,6 @@ export class UserService {
 
   getUserId(){
     return this.userId;
-  }
-
-  getAuthStatusListener(){
-    return this.authStatusListener.asObservable();
   }
 
   private setAuthTimer(duration: number){
