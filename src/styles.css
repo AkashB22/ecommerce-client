@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css?family=ABeeZee|Alegreya+Sans|Cantarell|Crete+Round|Pacifico&display=swap');
+@import url('~bootstrap/dist/css/bootstrap.min.css');
+@import url('~slick-carousel/slick/slick.css');
+@import url('~slick-carousel/slick/slick-theme.css');
 
 :root{
   --light-grey: #2b3032a1;
