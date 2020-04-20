@@ -10,8 +10,9 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   ProductsListener = new Subject<any>();
+  ProductsUploadListener = new Subject<any>()
   ProductsErrorListener = new Subject<any>();
-  productsUrl = `http://localhost:3000/api/products`;
+  productsUrl = `http://localhost:3001/products`;
   products = {}
 
   getProducts(){
@@ -34,4 +35,15 @@ export class ProductService {
     return this.ProductsErrorListener.asObservable();
   }
 
+  uploadProduct(product){
+    this.http.post(this.productsUrl, product)
+      .subscribe(
+        response=>{
+          this.ProductsUploadListener.next(response);
+        }, 
+        error=>{
+          this.ProductsErrorListener.next(error);
+        }
+      )
+  }
 }

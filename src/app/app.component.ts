@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from './services/user.service';
+import {Router, RouterEvent} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 
 import {User} from './models/user';
+import {UserService} from './services/user.service';
 import {faSearch, faShoppingBasket, faUserEdit} from '@fortawesome/free-solid-svg-icons';
 import {faFacebookF, faInstagram, faYoutube, faTwitter} from '@fortawesome/free-brands-svg-icons'
 
@@ -14,8 +16,17 @@ import {faFacebookF, faInstagram, faYoutube, faTwitter} from '@fortawesome/free-
 })
 export class AppComponent implements OnInit {
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService, private router: Router){
+    router.events.pipe(
+      filter(e => e instanceof RouterEvent)
+    ).subscribe(e => {
+        if((typeof(e['url']) === 'string' && e['url'].includes('admin')) || (typeof(e['urlAfterRedirects']) === 'string' && e['urlAfterRedirects'].includes('admin'))){
+          this.isAdmin = true;
+        }
+      })
+  }
 
+  isAdmin = false;
   validUser = false;
   username: string = '';
   title = 'Title';
@@ -31,6 +42,7 @@ export class AppComponent implements OnInit {
   faUserEdit = faUserEdit;
 
   ngOnInit(){
+
     this.userService.autoAuthUser();
     this.authListenerSubs = this.userService.getAuthStatusListener()
       .subscribe((auth)=>{

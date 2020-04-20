@@ -38,31 +38,57 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" routerLink='/home' routerLinkActive="active">Home <span
-                class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink='/events' routerLinkActive="active">Events</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink='/land' routerLinkActive="active">Landing Page</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink='/pdp' routerLinkActive="active">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink='/products-list' routerLinkActive="active">List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink='/product-details' routerLinkActive="active">Product Details</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink='/order-summary' routerLinkActive="active">Order</a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li> -->
+          <ng-template [ngIf] = "!isAdmin">
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/home' routerLinkActive="active">Home <span
+                  class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/events' routerLinkActive="active">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/admin' routerLinkActive="active">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/home/land' routerLinkActive="active">Landing Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/pdp' routerLinkActive="active">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/products-list' routerLinkActive="active">List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/product-details' routerLinkActive="active">Product Details</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/order-summary' routerLinkActive="active">Order</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li> -->
+          </ng-template>
+
+          <ng-template [ngIf] = "isAdmin">
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/admin' routerLinkActive="active">Admin <span
+                  class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/admin/products' routerLinkActive="active">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/admin/users' routerLinkActive="active">Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/admin/orders' routerLinkActive="active">Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink='/admin/carts' routerLinkActive="active">Carts</a>
+            </li>
+          </ng-template>
+
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="nav-item">

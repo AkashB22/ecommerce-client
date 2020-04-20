@@ -3,12 +3,12 @@ import {faQuestion, faSeedling, faRocket, faUserShield, faSearch, faSlidersH} fr
 import {NgsRevealConfig} from 'ngx-scrollreveal';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css'],
   providers: [NgsRevealConfig]
 })
-export class HomeComponent implements OnInit {
+export class MainComponent implements OnInit {
 
   constructor(private ngsRevealConfig: NgsRevealConfig) { 
     ngsRevealConfig.duration = 1000;

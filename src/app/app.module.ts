@@ -13,26 +13,26 @@ import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { ProfileComponent } from './profile/profile.component';
 import {TokenInterceptorService} from './services/token-interceptor.service';
-import { HomeComponent } from './home/home.component';
+import { MainComponent } from './main/main.component';
 import { EventsComponent } from './events/events.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PdpComponent } from './pdp/pdp.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LandingPageComponent,
     SignupComponent,
     SigninComponent,
     ProfileComponent,
-    HomeComponent,
+    MainComponent,
     EventsComponent,
-    LandingPageComponent,
     PdpComponent,
     ProductsListComponent,
     ProductDetailsComponent,
@@ -54,7 +54,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     SlickCarouselModule,
     NgsRevealModule,
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
