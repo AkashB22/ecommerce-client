@@ -51,7 +51,7 @@
                                     <label for="yes" class="form-check-label">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input type="radio" name="isTrending" id="isTrending2" class="form-check-input" value="no" formControlName="isTrending" />
+                                    <input type="radio" name="isTrending" id="isTrending2" class="form-check-input" value="no" checked formControlName="isTrending" />
                                     <label for="no" class="form-check-label">No</label>
                                 </div>
                             </label>
@@ -59,11 +59,11 @@
                         <div class="form-group">
                             Select your Product isDiscounted :
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="isDiscounted" id="isDiscounted1" class="form-check-input" value="yes" formControlName="isDiscounted" #discounted>
+                                <input type="radio" name="isDiscounted" id="isDiscounted1" class="form-check-input" value="yes" formControlName="isDiscounted" #discounted (change)="onIsDiscountChange">
                                 <label for="yes" class="form-check-label">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="isDiscounted" id="isDiscounted2" class="form-check-input" value="no" formControlName="isDiscounted" #notDiscounted>
+                                <input type="radio" name="isDiscounted" id="isDiscounted2" class="form-check-input" value="no" checked formControlName="isDiscounted" #notDiscounted>
                                 <label for="no" class="form-check-label">No</label>
                             </div>
                         </div>
