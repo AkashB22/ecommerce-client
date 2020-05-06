@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col">
             <h4>Products component</h4>
+            <button *ngIf="addProduct" (click)="addProduct = !addProduct" class="btn btn-danger">back</button>
             <button *ngIf="!addProduct" class="btn btn-primary my-3" (click)="onClick()">Add new products</button>
             <app-create [addProduct]="addProduct"></app-create>
         </div>

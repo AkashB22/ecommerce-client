@@ -35,6 +35,10 @@ export class ProductService {
     return this.ProductsErrorListener.asObservable();
   }
 
+  getProductsSuccessStatusListener(){
+    return this.ProductsUploadListener.asObservable();
+  }
+  
   uploadProduct(product){
     this.http.post(this.productsUrl, product)
       .subscribe(

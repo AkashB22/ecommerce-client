@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Input} from '@angular/core';
+import {Input, ElementRef} from '@angular/core';
+import {ViewChild} from '@angular/core';
+import {Subscription} from 'rxjs';
 import {FormBuilder, FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 import {ProductService} from './../../../services/product.service';
 
@@ -10,8 +12,18 @@ import {ProductService} from './../../../services/product.service';
 })
 export class CreateComponent implements OnInit {
   @Input() addProduct: Boolean;
+  @ViewChild('images', {static: false}) imagesDom : ElementRef;
   createProductForm : FormGroup;
   imagesUrl: Array<any> = [];
+  images: Array<any> = [];
+  ImagesErrorMessage : string = '';
+  imageCheck: boolean = false;
+  isServerError: boolean = false;
+  serverMessage: string;
+  productErrorSubscription: Subscription;
+  productSuccessSubscription: Subscription;
+
+
   errors_message = {
     'email' : [
       {type:'email', message: 'Not a valid emal.'},
@@ -28,11 +40,6 @@ export class CreateComponent implements OnInit {
       {type: 'required', message: 'name is required.'},
       {type: 'minlength', message: 'name should be minimum of 6 character.'},
       {type: 'maxlength', message: 'name could be maximum of 255 character.'},
-    ],
-    'images': [
-      {type: 'required', message: 'images is required.'},
-      {type: 'minlength', message: 'images should be minimum of 6 character.'},
-      {type: 'maxlength', message: 'images could be maximum of 255 character.'},
     ],
     'description': [
       {type: 'required', message: 'name is required.'},
@@ -131,7 +138,6 @@ export class CreateComponent implements OnInit {
   constructor(private fb : FormBuilder, private productService: ProductService) { 
     this.createProductForm = this.fb.group({
       name: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]),
-      images: [null, [Validators.required,  Validators.minLength(2), Validators.maxLength(5)]],
       description: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]),
       availableQuantity: new FormControl(0, [Validators.required, Validators.pattern('[0-9]*'), Validators.min(1)]),
       price: new FormControl(0, [Validators.required, Validators.pattern('[0-9]*'), Validators.min(1)]),
@@ -151,13 +157,29 @@ export class CreateComponent implements OnInit {
       ]),
       averageRating: new FormControl(0, [Validators.required, Validators.pattern('[0-9]*'), Validators.min(1)])  
     });
-
-    this.productService.ProductsUploadListener.subscribe(
-      (data)=> console.log(data)
-    )
   }
 
   ngOnInit() {
+    this.productSuccessSubscription = this.productService.getProductsSuccessStatusListener().subscribe(
+      (data)=>{
+        console.log(data);
+        this.isServerError = false;
+        this.serverMessage = "Product has been successfully created";
+      } 
+    )
+
+    this.productErrorSubscription = this.productService.getProductsErrorStatusListener().subscribe(
+      (data)=>{
+        console.log(data);
+        this.isServerError = true;
+        this.serverMessage = "Error while creating the product. Please try again later";
+      } 
+    )
+  }
+
+  ngOnDestroy(){
+    this.productSuccessSubscription.unsubscribe();
+    this.productErrorSubscription.unsubscribe();
   }
 
   onIsDiscountChange(e){
@@ -170,22 +192,31 @@ export class CreateComponent implements OnInit {
   
   onChange(event){
     if(event.target.files && event.target.files.length){
-      const files = event.target.files;
-      const images = [];
+      const files = event.target.files,
+        maxImages = 5,
+        minImages = 2;
       this.imagesUrl = [];
+      this.images = [];
 
-      for(let i=0; i<files.length; i++){
-        images.push(files[i]);
-        this.createProductForm.patchValue({
-          images: images
-        })
-        let reader = new FileReader();
-
-        reader.onload = ()=>{
-          this.imagesUrl.push(reader.result as string);
+      if(event.target.files.length > maxImages || event.target.files.length < minImages){
+        this.ImagesErrorMessage = "images must be less 5 images and greater than 2 images";
+        this.imageCheck = false;
+      } else{
+        this.ImagesErrorMessage = '';
+        this.imageCheck = true;
+        for(let i=0; i<files.length; i++){
+          this.images.push(files[i])
+          let reader = new FileReader();
+  
+          reader.onload = ()=>{
+            this.imagesUrl.push(reader.result as string);
+          }
+          reader.readAsDataURL(files[i])
         }
-        reader.readAsDataURL(files[i])
       }
+    } else{
+      this.imagesUrl = [];
+      this.images = [];
     }
   }
 
@@ -195,18 +226,17 @@ export class CreateComponent implements OnInit {
     // this.createProductForm.reset();
     let formData = new FormData();
     for(let key of Object.keys(formValue)){
-      if(key === 'images'){
-        for(let i=0; i< formValue[key].length; i++){
-          formData.append("images[]", formValue[key][i]);
-        }
-      } else{
-        formData.append(key, formValue[key]);
-      }
+      formData.append(key, formValue[key]);
     }
 
-    // for(let i=0; i<this.images.length; i++){
-    //   formData.append("images[]", this.images[i]);
-    // }
+    for(let i=0; i<this.images.length; i++){
+      formData.append("images[]", this.images[i]);
+    }
     this.productService.uploadProduct(formData);
+    this.createProductForm.reset();
+    this.imagesDom.nativeElement.value = "";
+    this.images = [];
+    this.imagesUrl = [];
+    window.scroll(0,0);
   }
 }
