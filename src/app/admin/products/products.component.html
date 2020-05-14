@@ -7,4 +7,13 @@
             <app-create [addProduct]="addProduct"></app-create>
         </div>
     </div>
+    <div class="row" *ngIf="products">
+        <div class="products" *ngFor="let product of products">
+            <ul>
+                <li class="product">
+                    {{product.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
