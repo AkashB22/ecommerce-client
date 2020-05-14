@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {Subscription} from 'rxjs';
 
 import {faSearch, faShoppingBasket, faUserEdit} from '@fortawesome/free-solid-svg-icons';
-import {faFacebookF, faInstagram, faYoutube, faTwitter} from '@fortawesome/free-brands-svg-icons'
+import {faFacebookF, faInstagram, faYoutube, faTwitter} from '@fortawesome/free-brands-svg-icons';
+
+import {ProductService} from './../../services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -20,10 +23,18 @@ export class ProductsComponent implements OnInit {
   username: String = null;
   validUser: Boolean = false;
   addProduct: Boolean = false;
+  products = {};
 
-  constructor() { }
+  constructor(private productService : ProductService) { }
 
   ngOnInit() {
+    this.productService.getProducts();
+
+    this.productService.getProductsStatusListener().subscribe(
+      data=>{
+        this.products = data["products"];
+      }
+    )
   }
 
   onClick(){
