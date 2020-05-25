@@ -11,7 +11,6 @@ import {ProductService} from './../../../services/product.service';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  @Input() addProduct: Boolean;
   @ViewChild('images', {static: false}) imagesDom : ElementRef;
   createProductForm : FormGroup;
   imagesUrl: Array<any> = [];

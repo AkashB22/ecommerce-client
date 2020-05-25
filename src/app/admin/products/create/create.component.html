@@ -1,4 +1,4 @@
-<div *ngIf="addProduct" class="container my-5">
+<div class="container my-5">
     <div class="row">
         <div class="col mx-auto">
             <div class="card">
@@ -103,11 +103,11 @@
                         <div class="form-group">
                             Select your Product isDiscounted :
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="isDiscounted" id="isDiscounted1" class="form-check-input" value="yes" formControlName="isDiscounted" #discounted (change)="onIsDiscountChange">
+                                <input type="radio" name="isDiscounted" id="isDiscounted1" class="form-check-input" [value]="yes" formControlName="isDiscounted" #discounted (change)="onIsDiscountChange">
                                 <label for="yes" class="form-check-label">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="isDiscounted" id="isDiscounted2" class="form-check-input" value="no" checked formControlName="isDiscounted" #notDiscounted>
+                                <input type="radio" name="isDiscounted" id="isDiscounted2" class="form-check-input" [value]="no" checked formControlName="isDiscounted" #notDiscounted>
                                 <label for="no" class="form-check-label">No</label>
                             </div>
                         </div>

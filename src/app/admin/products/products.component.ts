@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Router, RouterEvent} from '@angular/router';
+import {filter} from 'rxjs/operators';
 
 import {faSearch, faShoppingBasket, faUserEdit} from '@fortawesome/free-solid-svg-icons';
 import {faFacebookF, faInstagram, faYoutube, faTwitter} from '@fortawesome/free-brands-svg-icons';
 
-import {ProductService} from './../../services/product.service';
+
 
 @Component({
   selector: 'app-products',
@@ -22,23 +23,21 @@ export class ProductsComponent implements OnInit {
   faUserEdit = faUserEdit;
   username: String = null;
   validUser: Boolean = false;
-  addProduct: Boolean = false;
-  products = {};
+  hid: Boolean = false
 
-  constructor(private productService : ProductService) { }
-
-  ngOnInit() {
-    this.productService.getProducts();
-
-    this.productService.getProductsStatusListener().subscribe(
-      data=>{
-        this.products = data["products"];
-      }
-    )
+  constructor(private router: Router) { 
+    router.events.pipe(
+      filter(e => e instanceof RouterEvent)
+    ).subscribe(e => {
+        if((typeof(e['url']) === 'string' && e['url'] === "/admin/products")){
+          this.hid = false;
+        } else{
+          this.hid = true;
+        }
+      })
   }
 
-  onClick(){
-    this.addProduct = true;
+  ngOnInit() {
   }
 
 }

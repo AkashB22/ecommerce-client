@@ -2,18 +2,9 @@
     <div class="row">
         <div class="col">
             <h4>Products component</h4>
-            <button *ngIf="addProduct" (click)="addProduct = !addProduct" class="btn btn-danger">back</button>
-            <button *ngIf="!addProduct" class="btn btn-primary my-3" (click)="onClick()">Add new products</button>
-            <app-create [addProduct]="addProduct"></app-create>
-        </div>
-    </div>
-    <div class="row" *ngIf="products">
-        <div class="products" *ngFor="let product of products">
-            <ul>
-                <li class="product">
-                    {{product.name}}
-                </li>
-            </ul>
+            <button *ngIf="!hid" class="btn btn-primary my-3" routerLink="/admin/products/create">Add new products</button>
+            <button *ngIf="hid" routerLink="/admin/products" class="btn btn-danger">back</button>
         </div>
     </div>
 </div>
+<router-outlet></router-outlet>

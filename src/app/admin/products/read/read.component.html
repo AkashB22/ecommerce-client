@@ -1,1 +1,11 @@
-<p>read works!</p>
+<div class="container my-5">
+    <div class="row" *ngIf="products">
+        <div class="col-12 products mb-2" *ngFor="let product of products">
+            <div class="list-group">
+                <button class="list-group-item list-group-item-action">
+                    <a routerLink="/admin/products/update/{{product._id}}">{{product.name}}</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

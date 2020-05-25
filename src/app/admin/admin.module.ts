@@ -10,11 +10,13 @@ import { CreateComponent } from './products/create/create.component'
 import { UsersComponent } from './users/users.component';
 import { OrdersComponent } from './orders/orders.component';
 import { CartsComponent } from './carts/carts.component';
+import { UpdateComponent } from './products/update/update.component';
+import { ReadComponent } from './products/read/read.component';
 
 
 
 @NgModule({
-  declarations: [AdminComponent, ProductsComponent, UsersComponent, OrdersComponent, CartsComponent, CreateComponent],
+  declarations: [AdminComponent, ProductsComponent, UsersComponent, OrdersComponent, CartsComponent, CreateComponent, UpdateComponent, ReadComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

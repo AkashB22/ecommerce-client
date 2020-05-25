@@ -1,1 +1,214 @@
-<p>update works!</p>
+<div class="container my-5">
+    <div class="row">
+        <div class="col mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Add new products</h3>
+                </div>
+                <div class="card-body">
+                    <div class="server-messages">
+                        <div [ngClass]="isServerError ? 'alert alert-danger' : 'alert alert-success'" *ngIf="serverMessage">
+                            {{serverMessage}}
+                        </div>
+                    </div>
+                    <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="name">Enter your Product Name :</label>
+                            <input type="text" name="name" id="name" class="form-control" formControlName="name">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.name">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('name').hasError(error.type) && (createProductForm.get('name').dirty || createProductForm.get('name').touched)">
+                                    {{error.message}}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="images">Upload images :</label>
+                            <input type="file" name="images" id="images" class="form-control-file" (change)="onChange($event)" multiple="multiple" accept="image/*" #images>
+                            <!-- <div class="invalid-feedback">Example invalid custom file feedback</div> -->
+                        </div>
+                        <div *ngIf="imagesUrl" class="form-group row align-items-center justify-content-start">
+                            <ng-container *ngFor="let imageSrc of imagesUrl; let i = index">
+                                <div class="col mb-1">
+                                    <img class="img-thumbnail rounded mx-auto d-block" [src]="imageSrc" alt="image_{{i+1}}">
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="errors-message">
+                            <div class="error-message invalid-feedback" *ngIf="ImagesErrorMessage">{{ImagesErrorMessage}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Enter your Product description :</label>
+                            <textarea type="text" name="description" id="description" class="form-control" formControlName="description"></textarea>
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.description">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('description').hasError(error.type) && (createProductForm.get('description').dirty || createProductForm.get('description').touched)">{{error.message}}</div>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="availableQuantity">Enter your Product availableQuantity :</label>
+                            <input type="number" name="availableQuantity" id="availableQuantity" class="form-control" formControlName="availableQuantity">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.availableQuantity">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('availableQuantity').hasError(error.type) && (createProductForm.get('availableQuantity').dirty || createProductForm.get('availableQuantity').touched)">{{error.message}}</div>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Enter your Product price :</label>
+                            <input type="number" name="price" id="price" class="form-control" formControlName="price">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.price">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('price').hasError(error.type) && (createProductForm.get('price').dirty || createProductForm.get('price').touched)">{{error.message}}</div>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Enter your Product category :</label>
+                            <input type="text" name="category" id="category" class="form-control" formControlName="category">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.category">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('category').hasError(error.type) && (createProductForm.get('category').dirty || createProductForm.get('category').touched)">{{error.message}}</div>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="seller">Enter your Product seller :</label>
+                            <input type="text" name="seller" id="seller" class="form-control" formControlName="seller">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.seller">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('seller').hasError(error.type) && (createProductForm.get('seller').dirty || createProductForm.get('seller').touched)">{{error.message}}</div>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label for="isTrending">Select your Product isTrending :
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="isTrending" id="isTrending1" class="form-check-input" value="yes" formControlName="isTrending" />
+                                    <label for="yes" class="form-check-label">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="isTrending" id="isTrending2" class="form-check-input" value="no" checked formControlName="isTrending" />
+                                    <label for="no" class="form-check-label">No</label>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.isTrending">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('isTrending').hasError(error.type) && (createProductForm.get('isTrending').dirty || createProductForm.get('isTrending').touched)">{{error.message}}</div>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            Select your Product isDiscounted :
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="isDiscounted" id="isDiscounted1" class="form-check-input" value="yes" formControlName="isDiscounted" #discounted (change)="onIsDiscountChange">
+                                <label for="yes" class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="isDiscounted" id="isDiscounted2" class="form-check-input" value="no" checked formControlName="isDiscounted" #notDiscounted>
+                                <label for="no" class="form-check-label">No</label>
+                            </div>
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.isDiscounted">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('isDiscounted').hasError(error.type) && (createProductForm.get('isDiscounted').dirty || createProductForm.get('isDiscounted').touched)">{{error.message}}</div>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="discounted.checked && !notDiscounted.checked" class="form-group">
+                            <label for="discountPercent">Enter your Product discountPercent :</label>
+                            <input type="number" name="discountPercent" id="discountPercent" class="form-control" formControlName="discountPercent">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.discountPercent">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('discountPercent').hasError(error.type) && (createProductForm.get('discountPercent').dirty || createProductForm.get('discountPercent').touched)">{{error.message}}</div>
+                            </ng-container>
+                        </div>
+                        <div class="form-group" formArrayName="offers">
+                            <div>
+                                <label for="offers">Enter your Product Offers :</label>
+                            </div>
+                            <div *ngFor="let offer of offers.controls; let i = index" class="offers-list">
+                                <div class="row mb-1">
+                                    <div class="col-8">
+                                        <input type="text" name="offers_{{i}}" id="offers_{{i}}" class="form-control form-check-control mb-1" [formControlName]="i">
+                                    </div>
+                                    <div class="col-4 py-1">
+                                        <ng-template [ngIf]="i>0">
+                                            <button type="button" class="btn btn-secondary btn-sm mb-1" (click)="deleteOffers(i)">-</button>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                                <div class="errors-message block">
+                                    <ng-container *ngFor="let error of errors_message.offers">
+                                        <div class="error-message invalid-feedback" *ngIf="offers.controls[i].hasError(error.type) && (offers.controls[i].dirty || offers.controls[i].touched)">{{error.message}}</div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary btn-sm add-offers" type="button"  (click)="addOffers()">add Offers</button>
+                        </div>
+                        
+                        <div class="form-group" formArrayName="sizes">
+                            <div>
+                                <label for="sizes">Enter your Product sizes :</label>
+                            </div>
+                            <div *ngFor="let size of sizes.controls; let i = index" class="sizes-list">
+                                <div class="row mb-1">
+                                    <div class="col-8">
+                                        <input type="text" name="sizes_{{i}}" id="sizes_{{i}}" class="form-control form-check-control mb-1" [formControlName]="i">
+                                    </div>
+                                    <div class="col-4 py-1">
+                                        <ng-template [ngIf]="i>0">
+                                            <button type="button" class="btn btn-secondary btn-sm mb-1" (click)="deleteSizes(i)">-</button>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                                <div class="errors-message block">
+                                    <ng-container *ngFor="let error of errors_message.sizes">
+                                        <div class="error-message invalid-feedback" *ngIf="sizes.controls[i].hasError(error.type) && (sizes.controls[i].dirty || sizes.controls[i].touched)">{{error.message}}</div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary btn-sm add-sizes" type="button"  (click)="addSizes()">add Sizes</button>
+                        </div>
+                        <div class="form-group" formArrayName="colors">
+                           <div>
+                                <label for="colors">Enter your Product colors :</label>
+                           </div>
+                            <div *ngFor="let color of colors.controls; let i = index" class="colors-list">
+                                <div class="row mb-1">
+                                    <div class="col-8">
+                                        <input type="text" name="colors_{{i}}" id="colors_{{i}}" class="form-control form-check-control mb-1" [formControlName]="i">
+                                    </div>
+                                    <div class="col-4 py-1">
+                                        <ng-template [ngIf]="i>0">
+                                            <button type="button" class="btn btn-secondary btn-sm mb-1" (click)="deleteColors(i)">-</button>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                                <div class="errors-message block">
+                                    <ng-container *ngFor="let error of errors_message.colors">
+                                        <div class="error-message invalid-feedback" *ngIf="colors.controls[i].hasError(error.type) && (colors.controls[i].dirty || colors.controls[i].touched)">{{error.message}}</div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary btn-sm add-colors" type="button" (click)="addColors()">add Colors</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="averageRating">Enter your Product averageRating :</label>
+                            <input type="number" name="averageRating" id="averageRating" class="form-control" formControlName="averageRating">
+                        </div>
+                        <div class="errors-message">
+                            <ng-container *ngFor="let error of errors_message.averageRating">
+                                <div class="error-message invalid-feedback" *ngIf="createProductForm.get('averageRating').hasError(error.type) && (createProductForm.get('averageRating').dirty || createProductForm.get('averageRating').touched)">{{error.message}}</div>
+                            </ng-container>
+                        </div>
+                        <button class="btn btn-success" type="submit" [disabled]="!createProductForm.valid || !imageCheck">submit</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

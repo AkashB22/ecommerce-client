@@ -12,8 +12,9 @@ export class ProductService {
   ProductsListener = new Subject<any>();
   ProductsUploadListener = new Subject<any>()
   ProductsErrorListener = new Subject<any>();
+  ProductErrorListener = new Subject<any>();
   productsUrl = `http://localhost:3001/products`;
-  products = {}
+  products = {};
 
   getProducts(){
     this.http.get(this.productsUrl)
@@ -26,6 +27,15 @@ export class ProductService {
         }
       )
   }
+
+  getProductById(id){
+    return this.http.get(`${this.productsUrl}/${id}`);
+  }
+
+  getProductErrorStatusListener(){
+    return this.ProductErrorListener.asObservable()
+  }
+
 
   getProductsStatusListener(){
     return this.ProductsListener.asObservable()
@@ -44,6 +54,7 @@ export class ProductService {
       .subscribe(
         response=>{
           this.ProductsUploadListener.next(response);
+          this.ProductsListener.next(response);
         }, 
         error=>{
           this.ProductsErrorListener.next(error);
