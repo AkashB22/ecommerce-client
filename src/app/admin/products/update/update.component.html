@@ -204,9 +204,30 @@
                                 <div class="error-message invalid-feedback" *ngIf="createProductForm.get('averageRating').hasError(error.type) && (createProductForm.get('averageRating').dirty || createProductForm.get('averageRating').touched)">{{error.message}}</div>
                             </ng-container>
                         </div>
-                        <button class="btn btn-success" type="submit" [disabled]="!createProductForm.valid || !imageCheck">submit</button>
+                        <div class="btn-toolbar justify-content-between">
+                            <div>
+                                <button class="btn btn-success" type="submit" [disabled]="!createProductForm.valid || !imageCheck">update</button>
+                            </div>
+                            <div>
+                                <button class="btn btn-danger" type="button" (click)="open(content)">Delete</button>
+                            </div>
+                        </div>
                     </form>
-                    
+                    <ng-template #content let-modal>
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="modal-basic-title">Product Delete</h4>
+                          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <div>Are you sure you need to delete this product?</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-success" (click)="modal.close('yes')">Yes</button>
+                            <button type="button" class="btn btn-outline-danger" (click)="modal.close('no')">No</button>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
         </div>

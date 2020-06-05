@@ -19,8 +19,8 @@ export class CreateComponent implements OnInit {
   imageCheck: boolean = false;
   isServerError: boolean = false;
   serverMessage: string;
-  productErrorSubscription: Subscription;
-  productSuccessSubscription: Subscription;
+  productSub: Subscription;
+  createdProductName: string;
 
 
   errors_message = {
@@ -144,7 +144,7 @@ export class CreateComponent implements OnInit {
       seller: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]),
       isTrending: new FormControl('', [Validators.required]),
       isDiscounted: new FormControl('', [Validators.required]),
-      discountPercent: new FormControl(''),
+      discountPercent: new FormControl(0),
       offers: this.fb.array([
         this.fb.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)])
       ]),
@@ -159,26 +159,28 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productSuccessSubscription = this.productService.getProductsSuccessStatusListener().subscribe(
+    this.productSub = this.productService.getProductsUpdatedListener().subscribe(
       (data)=>{
         console.log(data);
-        this.isServerError = false;
-        this.serverMessage = "Product has been successfully created";
-      } 
-    )
-
-    this.productErrorSubscription = this.productService.getProductsErrorStatusListener().subscribe(
-      (data)=>{
-        console.log(data);
-        this.isServerError = true;
-        this.serverMessage = "Error while creating the product. Please try again later";
+        let  found = false;
+        data.forEach(p=>{
+          if(p["name"] === this.createdProductName){
+            found = true;
+          }
+        })
+        if(found){
+          this.isServerError = false;
+          this.serverMessage = "Product has been successfully created";
+        } else{
+          this.isServerError = true;
+          this.serverMessage = "Error while creating the product. Please try again later";
+        }
       } 
     )
   }
 
   ngOnDestroy(){
-    this.productSuccessSubscription.unsubscribe();
-    this.productErrorSubscription.unsubscribe();
+    this.productSub.unsubscribe();
   }
 
   onIsDiscountChange(e){
@@ -231,7 +233,8 @@ export class CreateComponent implements OnInit {
     for(let i=0; i<this.images.length; i++){
       formData.append("images[]", this.images[i]);
     }
-    this.productService.uploadProduct(formData);
+    this.productService.addProduct(formData);
+    this.createdProductName = this.createProductForm.value["name"]
     this.createProductForm.reset();
     this.imagesDom.nativeElement.value = "";
     this.images = [];

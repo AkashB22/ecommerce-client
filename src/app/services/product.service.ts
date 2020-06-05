@@ -9,18 +9,20 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  ProductsListener = new Subject<any>();
-  ProductsUploadListener = new Subject<any>()
+  productsUpdated = new Subject<any>();
   ProductsErrorListener = new Subject<any>();
-  ProductErrorListener = new Subject<any>();
+  productUpdated = new Subject<any>();
   productsUrl = `http://localhost:3001/products`;
-  products = {};
+  products = [];
 
   getProducts(){
     this.http.get(this.productsUrl)
       .subscribe(
         response=>{
-          this.ProductsListener.next(response);
+          console.log("got data from get products api");
+          this.products = response["products"];
+          console.log(this.products);
+          this.productsUpdated.next([...this.products]);
         }, 
         error=>{
           this.ProductsErrorListener.next(error);
@@ -32,33 +34,51 @@ export class ProductService {
     return this.http.get(`${this.productsUrl}/${id}`);
   }
 
-  getProductErrorStatusListener(){
-    return this.ProductErrorListener.asObservable()
-  }
 
-
-  getProductsStatusListener(){
-    return this.ProductsListener.asObservable()
+  getProductsUpdatedListener(){
+    return this.productsUpdated.asObservable()
   }
 
   getProductsErrorStatusListener(){
     return this.ProductsErrorListener.asObservable();
   }
 
-  getProductsSuccessStatusListener(){
-    return this.ProductsUploadListener.asObservable();
-  }
-  
-  uploadProduct(product){
+  addProduct(product){
     this.http.post(this.productsUrl, product)
       .subscribe(
         response=>{
-          this.ProductsUploadListener.next(response);
-          this.ProductsListener.next(response);
-        }, 
-        error=>{
-          this.ProductsErrorListener.next(error);
+          this.products.push(response["product"]);
+          this.productsUpdated.next([...this.products]);
         }
       )
+  }
+
+  deleteProduct(id){
+    this.http.delete(`${this.productsUrl}/${id}`)
+      .subscribe(data=>{
+        const updatedProducts = this.products.filter(p => p._id !== id);
+        this.products = updatedProducts;
+        this.productsUpdated.next([...this.products]);
+      }); 
+  }
+
+  updateProduct(id, product){
+    this.http.put(`${this.productsUrl}/${id}`, product)
+    .subscribe(
+      data=>{
+        console.log("data updated");
+        const updatedProducts = [...this.products];
+        const oldProductIndex = updatedProducts.findIndex(p => p._id === id);
+        updatedProducts[oldProductIndex] = data["product"];
+        this.products = updatedProducts;
+        console.log(this.products);
+        this.productsUpdated.next([...this.products]);
+        this.productUpdated.next(data);
+      }
+    )
+  }
+
+  getUpdatedStatus(){
+    return this.productUpdated.asObservable();
   }
 }

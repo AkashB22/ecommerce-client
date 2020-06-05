@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Input, ElementRef} from '@angular/core';
+import {Router} from '@angular/router';
 import {ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {FormBuilder, FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {ProductService} from './../../../services/product.service';
 
@@ -26,6 +28,8 @@ export class UpdateComponent implements OnInit {
   serverMessage: string;
   productErrorSubscription: Subscription;
   productSuccessSubscription: Subscription;
+  closeResult = '';
+  imageNames = [];
 
   errors_message = {
     'email' : [
@@ -138,10 +142,10 @@ export class UpdateComponent implements OnInit {
     this.colors.removeAt(index);
   }
 
-  constructor(private route : ActivatedRoute, private productService : ProductService, private fb : FormBuilder,) { 
+  constructor(private route : ActivatedRoute, private productService : ProductService, private fb : FormBuilder, private router : Router, private modalService: NgbModal) { 
     this.route.params.subscribe(
       (data)=>{
-        console.log(data);
+        // console.log(data);
         this.productId = data.id;
       }
     )
@@ -154,7 +158,7 @@ export class UpdateComponent implements OnInit {
       seller: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]),
       isTrending: new FormControl('', [Validators.required]),
       isDiscounted: new FormControl('', [Validators.required]),
-      discountPercent: new FormControl(''),
+      discountPercent: new FormControl(0),
       offers: this.fb.array([
         this.fb.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)])
       ]),
@@ -172,13 +176,26 @@ export class UpdateComponent implements OnInit {
     this.productService.getProductById(this.productId).subscribe(
       response=>{
         this.product = response["product"];
-        console.log(this.product);
+        // console.log(this.product);
         this.product["isDiscounted"] = (this.product["isDiscounted"]) ? 'yes' : 'no';
         this.product["isTrending"] = (this.product["isTrending"]) ? 'yes' : 'no';
         this.createProductForm.patchValue(this.product);
+
+        this.imageNames = this.product["imagePath"];
+
+        this.imagesUrl = response["imageBase64Path"];
+        this.images = this.imagesUrl;
+        this.imageCheck = this.imagesUrl.length < 5 || this.imagesUrl.length > 2 ? true : false;
       }, 
       error=>{
         this.productError = error.message;
+      }
+    )
+
+    this.productService.getUpdatedStatus().subscribe(
+      data=>{
+        this.isServerError = false;
+        this.serverMessage = "Product has been Updated created";
       }
     )
   }
@@ -223,8 +240,12 @@ export class UpdateComponent implements OnInit {
 
   onSubmit(){
     let formValue = this.createProductForm.value;
-    console.log(formValue);
+    // console.log(formValue);
     // this.createProductForm.reset();
+    formValue.isDiscounted = formValue.isDiscounted === "yes" ? true : false;
+    formValue.isTrending = formValue.isTrending === "yes" ? true : false;
+    // formValue.discountPercent = formValue.discountPercent === "null" ? null : formValue.discountPercent
+    
     let formData = new FormData();
     for(let key of Object.keys(formValue)){
       formData.append(key, formValue[key]);
@@ -233,12 +254,42 @@ export class UpdateComponent implements OnInit {
     for(let i=0; i<this.images.length; i++){
       formData.append("images[]", this.images[i]);
     }
-    this.productService.uploadProduct(formData);
-    this.createProductForm.reset();
-    this.imagesDom.nativeElement.value = "";
-    this.images = [];
-    this.imagesUrl = [];
+    formData.append("imagePath", JSON.stringify(this.imageNames));
+    this.productService.updateProduct(this.productId, formData)
+      
+    // this.createProductForm.reset();
+    // this.imagesDom.nativeElement.value = "";
+    // this.images = [];
+    // this.imagesUrl = [];
     window.scroll(0,0);
   }
 
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      if(result === 'yes'){
+        this.deleteProduct();
+      } else{
+        // console.log('Deleting product has been cancelled');
+      }
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  deleteProduct(){
+    // console.log('send api call to delete the product');
+    this.productService.deleteProduct(this.productId);
+    this.router.navigateByUrl("/admin/products");
+  }
 }

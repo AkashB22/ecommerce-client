@@ -26,7 +26,7 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getProducts();
-    this.productsStatusListenerSub = this.productService.getProductsStatusListener()
+    this.productsStatusListenerSub = this.productService.getProductsUpdatedListener()
       .subscribe(response=>{
         this.products = response.products;
         this.products.map(product=>{

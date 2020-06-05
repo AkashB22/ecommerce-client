@@ -11,17 +11,22 @@ import {ProductService} from './../../../services/product.service';
 export class ReadComponent implements OnInit {
 
   constructor(private productService : ProductService) { }
-
+  
+  private productsSub : Subscription;
   products = [];
 
   ngOnInit() {
     this.productService.getProducts();
-
-    this.productService.getProductsStatusListener().subscribe(
+    this.productsSub = this.productService.getProductsUpdatedListener().subscribe(
       data=>{
-        this.products = data["products"];
+        console.log("data", data);
+        this.products = data;
       }
     )
+  }
+
+  ngOnDestroy(){
+    this.productsSub.unsubscribe();
   }
 
 }
