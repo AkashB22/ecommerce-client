@@ -17,8 +17,8 @@
                         <div class="product-grid border mr-1 pb-1">
                             <div class="product-image">
                                 <a href="">
-                                    <img class="pic-1" [src]="product.imagePath[0]" alt="Product1">
-                                    <img class="pic-2" [src]="product.imagePath[1]" alt="Product1">
+                                    <img class="pic-1" [src]="product.imageBase64Path[0]" alt="Product1">
+                                    <img class="pic-2" [src]="product.imageBase64Path[1]" alt="Product1">
                                 </a>
                                 <span class="product-trend-label" *ngIf="product.isTrending">Trending</span>
                                 <span class="product-discount-label" *ngIf="product.isDiscounted">Discounted(%)</span>

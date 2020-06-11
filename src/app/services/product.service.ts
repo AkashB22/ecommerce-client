@@ -81,4 +81,8 @@ export class ProductService {
   getUpdatedStatus(){
     return this.productUpdated.asObservable();
   }
+
+  getImage(imageName){
+    return this.http.post(`${this.productsUrl}/image`, {"image": imageName})
+  }
 }

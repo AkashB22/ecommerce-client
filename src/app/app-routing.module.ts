@@ -17,7 +17,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/admin', pathMatch: 'full' },
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'pdp', component: PdpComponent },
   { path: 'land', component: LandingPageComponent },
   { path: 'signup', component: SignupComponent },

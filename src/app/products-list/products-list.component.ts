@@ -28,13 +28,7 @@ export class ProductsListComponent implements OnInit {
     this.productService.getProducts();
     this.productsStatusListenerSub = this.productService.getProductsUpdatedListener()
       .subscribe(response=>{
-        this.products = response.products;
-        this.products.map(product=>{
-          for(let i=0; i<product.imagePath.length; i++){
-            product.imagePath[i] = 'assets/image/' + product.imagePath[i];
-          }
-          return product;
-        })
+        this.products = response;
         console.log(this.products);
       })
 
@@ -49,5 +43,4 @@ export class ProductsListComponent implements OnInit {
     this.productsStatusListenerSub.unsubscribe();
     this.productsErrorStatusListenerSub.unsubscribe();
   }
-
 }
