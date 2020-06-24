@@ -14,12 +14,10 @@
             <div class="row py-3 text-center" *ngIf="products">
                 <ng-container *ngFor="let product of products">
                     <div class="col-md-4 py-3">
-                        <div class="product-grid border mr-1 pb-1">
-                            <div class="product-image">
-                                <a href="">
+                        <div class="product-grid border mr-1 pb-1" [routerLink]="['/product-details', product._id]">
+                            <div class="product-image" *ngIf="product.imageBase64Path">
                                     <img class="pic-1" [src]="product.imageBase64Path[0]" alt="Product1">
                                     <img class="pic-2" [src]="product.imageBase64Path[1]" alt="Product1">
-                                </a>
                                 <span class="product-trend-label" *ngIf="product.isTrending">Trending</span>
                                 <span class="product-discount-label" *ngIf="product.isDiscounted">Discounted(%)</span>
                                 <ul class="social">

@@ -11,7 +11,7 @@
                             {{serverMessage}}
                         </div>
                     </div>
-                    <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                    <form *ngIf="product" [formGroup]="createProductForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">Enter your Product Name :</label>
                             <input type="text" name="name" id="name" class="form-control" formControlName="name">
@@ -19,7 +19,7 @@
                         <div class="errors-message">
                             <ng-container *ngFor="let error of errors_message.name">
                                 <div class="error-message invalid-feedback" *ngIf="createProductForm.get('name').hasError(error.type) && (createProductForm.get('name').dirty || createProductForm.get('name').touched)">
-                                    {{error.message}}
+                                   {{error.message}}
                                 </div>
                             </ng-container>
                         </div>

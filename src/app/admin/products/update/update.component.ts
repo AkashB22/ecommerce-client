@@ -142,6 +142,34 @@ export class UpdateComponent implements OnInit {
     this.colors.removeAt(index);
   }
 
+  setExistingOffers(existingOffers): FormArray{
+    const formArray = new FormArray([]);
+    existingOffers.forEach((s, i) =>{
+      formArray.push(this.fb.control(s, [Validators.required, Validators.minLength(6), Validators.maxLength(255)]));
+      formArray.at(i).markAsDirty();
+    })
+    return formArray;
+  }
+
+  setExistingSizes(existingSizes): FormArray{
+    const formArray = new FormArray([]);
+    existingSizes.forEach((s, i) =>{
+      formArray.push(this.fb.control(s, [Validators.required, Validators.minLength(6), Validators.maxLength(255)]));
+      formArray.at(i).markAsDirty();
+    })
+
+    return formArray;
+  }
+
+  setExistingColors(existingColors): FormArray{
+    const formArray = new FormArray([]);
+    existingColors.forEach((s, i) =>{
+      formArray.push(this.fb.control(s, [Validators.required, Validators.minLength(6), Validators.maxLength(255)]));
+      formArray.at(i).markAsDirty();
+    })
+    return formArray;
+  }  
+
   constructor(private route : ActivatedRoute, private productService : ProductService, private fb : FormBuilder, private router : Router, private modalService: NgbModal) { 
     this.route.params.subscribe(
       (data)=>{
@@ -168,7 +196,7 @@ export class UpdateComponent implements OnInit {
       colors: this.fb.array([
         this.fb.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)])
       ]),
-      averageRating: new FormControl(0, [Validators.required, Validators.pattern('[0-9]*'), Validators.min(1)])  
+      averageRating: new FormControl(0, [Validators.required, Validators.pattern('[0-5](\.[0-9])?'), Validators.min(1)])  
     });
   }
 
@@ -179,7 +207,12 @@ export class UpdateComponent implements OnInit {
         // console.log(this.product);
         this.product["isDiscounted"] = (this.product["isDiscounted"]) ? 'yes' : 'no';
         this.product["isTrending"] = (this.product["isTrending"]) ? 'yes' : 'no';
+        this.product["discountPercent"] = (this.product["discountPercent"] === null) ? 0 : (isNaN(this.product["discountPercent"])) ? 0 : parseInt(this.product["discountPercent"]);
         this.createProductForm.patchValue(this.product);
+        this.createProductForm.setControl("offers", this.setExistingOffers(this.product['offers']));
+        this.createProductForm.setControl("sizes", this.setExistingSizes(this.product['sizes']));
+        this.createProductForm.setControl("colors", this.setExistingColors(this.product['colors']));
+        console.log(this.createProductForm.value);
 
         this.imageNames = this.product["imagePath"];
 

@@ -143,7 +143,7 @@ export class CreateComponent implements OnInit {
       category: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]),
       seller: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]),
       isTrending: new FormControl('', [Validators.required]),
-      isDiscounted: new FormControl('', [Validators.required]),
+      isDiscounted: new FormControl('no', [Validators.required]),
       discountPercent: new FormControl(0),
       offers: this.fb.array([
         this.fb.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(255)])

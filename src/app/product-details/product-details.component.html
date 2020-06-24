@@ -12,29 +12,19 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" *ngIf="product">
     <div class="row">
         <div class="col-md-6">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" *ngIf="imageBase64">
                 <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    <li *ngFor="let image of imageBase64; let i = index" data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}"  [ngClass]="i == 0 ? 'active' : ''"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="assets/image/bg-10.jpg" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="assets/image/bg-69.jpg" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="assets/image/bg-84.jpg" alt="Third slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="assets/image/image00008.jpg" alt="Fourth slide">
-                    </div>
+                    <ng-container *ngFor="let image of imageBase64; let k = index">
+                        <div class="carousel-item" [ngClass]="k == 0 ? 'item active' : 'item'">
+                            <img class="d-block w-100" [src]="image" alt="First slide" >
+                        </div>
+                    </ng-container>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -46,18 +36,11 @@
                 </a>
             </div>
             <div class="row my-3 mx-3">
-                <div class="col-md-4 my-3">
-                    <img class="d-block w-100" data-target="#carouselExampleIndicators" data-slide-to="0" src="assets/image/bg-10.jpg" alt="First slide">
-                </div>
-                <div class="col-md-4 my-3">
-                    <img class="d-block w-100" data-target="#carouselExampleIndicators"data-target="#carouselExampleIndicators" data-slide-to="1" src="assets/image/bg-69.jpg" alt="Second slide">
-                </div>
-                <div class="col-md-4 my-3">
-                    <img class="d-block w-100" data-target="#carouselExampleIndicators" data-slide-to="2" src="assets/image/bg-84.jpg" alt="Third slide">
-                </div>
-                <div class="col-md-4 my-3">
-                    <img class="d-block w-100" data-target="#carouselExampleIndicators" data-slide-to="3" src="assets/image/image00008.jpg" alt="Fourth slide">
-                </div>
+                <ng-container *ngFor="let image of imageBase64; let i = index">
+                    <div class="col-md-4 my-3">
+                        <img class="d-block w-100" data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}" [src]="image" alt="First slide">
+                    </div>
+                </ng-container>
             </div>
         </div>
         <div class="col-md-6">

@@ -3,7 +3,7 @@
         <div class="col-12 products mb-2" *ngFor="let product of products">
             <div class="list-group">
                 <button class="list-group-item list-group-item-action">
-                    <a routerLink="/admin/products/update/{{product._id}}">{{product.name}}</a>
+                    <a routerLink="/admin/products/update/{{product._id}}">{{product.name || "Unknown Product"}}</a>
                 </button>
             </div>
         </div>
