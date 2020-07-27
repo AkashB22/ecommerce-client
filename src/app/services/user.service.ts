@@ -14,8 +14,8 @@ export class UserService {
   private token: string;
   private tokenTimer: any;
   private userId: string;
-  private users = 'http://localhost:3000/users';
-  private index = 'http://localhost:3000';
+  private users = 'http://localhost:3002/users';
+  private index = 'http://localhost:3002';
   private xAuthHeader = {
     headers : new HttpHeaders({
       'x-auth' : 'false'

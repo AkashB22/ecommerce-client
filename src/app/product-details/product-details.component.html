@@ -1,11 +1,11 @@
-<div class="container mt-4">
+<div class="container mt-4" *ngIf="product">
     <div class="row">
         <div class="col-md-12">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Library</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    <li class="breadcrumb-item"><a href="#">{{product.category}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{product.name}}}</li>
                 </ol>
             </nav>
         </div>
@@ -45,46 +45,36 @@
         </div>
         <div class="col-md-6">
             <div class="row">
-                <h2 class="product-name">Monkey.D.Luffy, Straw Hats</h2>
+                <h2 class="product-name">{{product.name}}</h2>
             </div>
             <div class="row price-content">
                 <h1 class="price-final mr-3">
-                    <fa-icon [icon]="faRupeeSign"></fa-icon>599
+                    <fa-icon [icon]="faRupeeSign"></fa-icon>{{product.price}}
                 </h1>
-                <h3 class="price-without-discount mr-2">
-                    <fa-icon [icon]="faRupeeSign"></fa-icon><del>799</del>
+                <h3 class="price-without-discount mr-2" *ngIf="product.discountPercent">
+                    <fa-icon [icon]="faRupeeSign"></fa-icon><del>{{(product.price * (100 + product.discountPercent) / 100) | number : '1.0-0'}}</del>
                 </h3>
-                <h2 class="text-success">
-                    30% off
+                <h2 class="text-success" *ngIf="product.discountPercent">
+                    {{product.discountPercent}}% off
                 </h2>
             </div>
             <div class="row ratings">
                 <h3 class="rating-icon text-warning">
-                    <fa-icon [icon]="faStar"></fa-icon>
-                    <fa-icon [icon]="faStar"></fa-icon>
-                    <fa-icon [icon]="faStar"></fa-icon>
-                    <fa-icon [icon]="faStarHalfAlt"></fa-icon>
-                    <fa-icon [icon]="faRStar"></fa-icon>
+                    <ng-container  *ngFor="let star of counter(product.averageRating); let i = index">
+                        <fa-icon [icon]="faStar"></fa-icon>
+                    </ng-container> 
+                    <fa-icon [icon]="faStarHalfAlt" *ngIf="isDecimal(product.averageRating)"></fa-icon>
+                    <ng-container  *ngFor="let star of counter(noStar(product.averageRating))")>
+                        <fa-icon [icon]="faRStar"></fa-icon>
+                    </ng-container>
                 </h3>
-                <h5 class="rating-text px-1 py-1 my-1">1200 star rating and 250 reviews</h5>
+                <!-- <h5 class="rating-text px-1 py-1 my-1">1200 star rating and 250 reviews</h5> -->
             </div>
-            <div class="row offers">
-                <div class="offer-list">
+            <div class="row offers" *ngIf="product.offers" >
+                <div class="offer-list" *ngFor="let offer of product.offers">
                     <p>
                         <fa-icon class="text-success mr-1" [icon]="faCheckSquare"></fa-icon>
-                        <strong class="mr-1">Bank Offer</strong>20% Discount on SBI cards
-                    </p>
-                </div>
-                <div class="offer-list">
-                    <p>
-                        <fa-icon class="text-success mr-1" [icon]="faCheckSquare"></fa-icon>
-                        <strong class="mr-1">Bank Offer</strong>5% CashBack offer on Axis Bank
-                    </p>
-                </div>
-                <div class="offer-list">
-                    <p>
-                        <fa-icon class="text-success mr-1" [icon]="faCheckSquare"></fa-icon>
-                        <strong class="mr-1">Bank Offer</strong>25% Discount on all Credit cards
+                        <strong class="mr-1">Bank Offer</strong>{{offer}}
                     </p>
                 </div>
                 <div class="offer-list">
@@ -105,29 +95,28 @@
             </div>
             <div class="row size mt-2">
                 <h4 class="mr-2 px-1 py-1">Size:</h4>
-                <div class="dropdown show">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown show" #dropdownName>
+                    <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="stopPropagetion($event)">
                       Select Sizes
                     </a>
                   
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="#">Small</a>
-                      <a class="dropdown-item" href="#">Medium</a>
-                      <a class="dropdown-item" href="#">Large</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" *ngFor="let size of product.sizes">
+                      <a class="dropdown-item" (click)="clickDropDownHandler($event)">{{size}}</a>
                     </div>
                 </div>
             </div>
             <div class="row colors mt-2">
                 <h4 class="mr-2">Colors:</h4>
-                <a href="" class="btn btn-primary text-light mr-1">Sky Blue</a>
-                <a href="" class="btn btn-info text-light">Blue</a>
-                <a href="" class="btn btn-danger text-light mr-1">Red</a>
-                <a href="" class="btn btn-success text-light mr-1">Green</a>
-                <a href="" class="btn btn-warning text-light mr-1">Yellow</a>
+                <ng-container *ngFor="let color of product.colors">
+                    <button class="btn btn-primary text-light mr-1" [ngStyle]="{'background-color': color, 'border-color': color}">{{color}}</button>
+                </ng-container>
             </div>
             <div class="row mt-2">
                 <h4 class="seller mr-1">Seller: </h4>
-                <p class="seller-name px-1 py-1">Online Store</p>
+                <p class="seller-name px-1 py-1">{{product.seller}}</p>
+            </div>
+            <div class="row mt-1">
+                <button class="btn btn-success">Add To Cart</button>
             </div>
         </div>
     </div>

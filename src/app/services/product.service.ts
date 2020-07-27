@@ -12,7 +12,7 @@ export class ProductService {
   productsUpdated = new Subject<any>();
   ProductsErrorListener = new Subject<any>();
   productUpdated = new Subject<any>();
-  productsUrl = `http://localhost:3001/products`;
+  productsUrl = `http://localhost:3002/products`;
   products = [];
 
   getProducts(){
