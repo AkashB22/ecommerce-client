@@ -146,7 +146,7 @@ export class UserService {
       )
   }
 
-    getAuthStatusListener(){
+  getAuthStatusListener(){
     return this.authStatusListener.asObservable();
   }
 
